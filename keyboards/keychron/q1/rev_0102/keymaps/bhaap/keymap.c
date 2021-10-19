@@ -29,11 +29,8 @@ enum custom_keycodes {
     KC_MISSION_CONTROL = SAFE_RANGE,
 #endif
     KC_LAUNCHPAD,
-};
-
-enum macro_keycodes {
-  TWCH,
-  GGEZ,
+    TWCH,
+    GGEZ,
 };
 
 enum tapdance_keycodes {

@@ -1,6 +1,6 @@
 # Bhaap's Keychron Q1 keymap
 
-- Encoder functionality added with CTRL and SHIFT working as modifiers to change its behaviour 
+- Encoder functionality added with CTRL and SHIFT working as modifiers to change its behaviour
 - RCTRL and RSHFT is not present and are replaces by two Macro keys
 - Old Caps Lock key is now Backspace
 - Double SHift tap activates CAPS_LOCK
