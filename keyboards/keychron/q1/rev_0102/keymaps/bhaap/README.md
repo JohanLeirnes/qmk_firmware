@@ -11,7 +11,7 @@
 
 ## Changelog
 
-### 18/10/2021 - 1.0.0
+### 18/10/2021 - 1.0.1
 
 - Encoder support with modifier keys added
 - Replaced RCTRL and RSHFT with Macrokeys
