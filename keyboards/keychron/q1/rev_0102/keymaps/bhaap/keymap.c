@@ -51,7 +51,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 [MAC_BASE] = LAYOUT_iso_83(
      KC_ESC,             KC_BRID,  KC_BRIU,  KC_MCTL,  KC_LPAD,  RGB_VAD,  RGB_VAI,  KC_MPRV,  KC_MPLY,  KC_MNXT,  KC_MUTE,  KC_VOLD,  KC_VOLU,  KC_CAPP,  KC__MUTE,
-     KC_GRV,   KC_1,     KC_2,     KC_3,     KC_4,     KC_5,     KC_6,     KC_7,     KC_8,     KC_9,     KC_0,     KC_MINS,  KC_EQL,   KC_BSPC,            KC_PGUP,
+     KC_GRV,   KC_1,     KC_2,     KC_3,     KC_4,     KC_5,     KC_6,     KC_7,     KC_8,     KC_9,     KC_0,     KC_MINS,  KC_EQL,   MO(MAC_FN2),            KC_PGUP,
      KC_TAB,   KC_Q,     KC_W,     KC_E,     KC_R,     KC_T,     KC_Y,     KC_U,     KC_I,     KC_O,     KC_P,     KC_LBRC,  KC_RBRC,                      KC_PGDN,
      KC_BSPC,  KC_A,     KC_S,     KC_D,     KC_F,     KC_G,     KC_H,     KC_J,     KC_K,     KC_L,     KC_SCLN,  KC_QUOT,  KC_NUHS,  KC_ENT,             KC_DEL,
      KC_LSFT,  KC_NUBS,  KC_Z,     KC_X,     KC_C,     KC_V,     KC_B,     KC_N,     KC_M,     KC_COMM,  KC_DOT,   KC_SLSH,          TD(TD_RSFT_CAPS),     KC_UP,
@@ -82,6 +82,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      KC_TRNS,  KC_TRNS,  KC_TRNS,                                KC_TRNS,                                KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS),
 
 [WIN_FN2] = LAYOUT_iso_83(
+     KC_TRNS,            KC_F13,   KC_F14,   KC_F15,   KC_F16,   KC_F17,   KC_F18,   KC_F19,   KC_F20,   KC_F21,   KC_F22,   KC_F23,   KC_F24,   KC_TRNS,  KC_TRNS,
+     KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,            KC_TRNS,
+     KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,                      KC_TRNS,
+     KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,            KC_TRNS,
+     KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,            TWCH,     KC_TRNS,
+     KC_TRNS,  KC_TRNS,  KC_TRNS,                                KC_TRNS,                                KC_TRNS,  KC_TRNS,  GGEZ,     KC_TRNS,  KC_TRNS,  KC_TRNS),
+
+[MAC_FN2] = LAYOUT_iso_83(
      KC_TRNS,            KC_F13,   KC_F14,   KC_F15,   KC_F16,   KC_F17,   KC_F18,   KC_F19,   KC_F20,   KC_F21,   KC_F22,   KC_F23,   KC_F24,   KC_TRNS,  KC_TRNS,
      KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,            KC_TRNS,
      KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,                      KC_TRNS,
@@ -141,25 +149,52 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
     uint8_t mod_state = get_mods();// Store which mods are held
     del_mods(MOD_MASK_CTRL);       // Ignore all CTRL keys
     if (clockwise) {
-        tap_code(KC_DOWN);         // PGDN on clockwise turn
+        tap_code(RGB_SPI);         // Increase effect speed on clockwise turn
     } else {
-        tap_code(KC_UP);         // PGUP on counter-clockwise
+        tap_code(RGB_SPD);         // Decrease effect speed on counter-clockwise
     }
     set_mods(mod_state);           // Add back CTRL key(s)
   } else if (get_mods() & MOD_MASK_SHIFT) {  // If a SHIFT is being held
     uint8_t mod_state = get_mods();// Store which mods are held
     del_mods(MOD_MASK_SHIFT);       // Ignore all SHIFT keys
     if (clockwise) {
-        tap_code(KC_PGDN);         // PGDN on clockwise turn
+        tap_code(RGB_VAI);         // Increase value (brightness) on clockwise turn
     } else {
-        tap_code(KC_PGUP);         // PGUP on counter-clockwise
+        tap_code(RGB_VAD);         // Decrease value (brightness) on counter-clockwise
     }
     set_mods(mod_state);           // Add back SHIFT key(s)
+  } else if (get_mods() & MOD_MASK_ALT) {  // If a ALT is being held
+    uint8_t mod_state = get_mods();// Store which mods are held
+    del_mods(MOD_MASK_ALT);       // Ignore all ALT keys
+    if (clockwise) {
+        tap_code(RGB_HUI);         // Increase hue on clockwise turn
+    } else {
+        tap_code(RGB_HUD);         // Decrease hue on counter-clockwise
+    }
+    set_mods(mod_state);           // Add back ALT key(s)
+  } else if (get_mods() & MOD_MASK_CS) {  // If a CTRL+SHIFT is being held
+    uint8_t mod_state = get_mods();// Store which mods are held
+    del_mods(MOD_MASK_CS);       // Ignore all CTRL+SHIFT keys
+    if (clockwise) {
+        tap_code(RGB_SAI);         // Increase saturation on clockwise turn
+    } else {
+        tap_code(RGB_SAD);         // Decrease saturation on counter-clockwise
+    }
+    set_mods(mod_state);           // Add back CTRL+SHIFT key(s)
+  } else if (get_mods() & MOD_MASK_SA) {  // If a SHIFT+ALT is being held
+    uint8_t mod_state = get_mods();// Store which mods are held
+    del_mods(MOD_MASK_SA);       // Ignore all SHIFT+ALT keys
+    if (clockwise) {
+        tap_code(RGB_MOD);       // RGB MODE Forward on clockwise turn
+    } else {
+        tap_code(RGB_RMOD);   // RGB MODE Reverse on counter-clockwise
+    }
+    set_mods(mod_state);           // Add back SHIFT+ALT key(s)
   } else {                     // If no MODS is held
     if (clockwise) {
-        tap_code(KC_VOLU);   // VOLUMEUP on clockwise turn
+        tap_code(KC_VOLU);   // Volume up on clockwise turn
         } else {
-        tap_code(KC_VOLD);   // VOLUMEDOWN on counterclockwise
+        tap_code(KC_VOLD);   // Volume down on counter-clockwise
         }
     }
     return false;
