@@ -145,51 +145,36 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 }
 
 bool encoder_update_user(uint8_t index, bool clockwise) {
-  if (get_mods() & MOD_MASK_CTRL) {  // If a CTRL is being held
-    uint8_t mod_state = get_mods();// Store which mods are held
-    del_mods(MOD_MASK_CTRL);       // Ignore all CTRL keys
+  if (get_mods() & MOD_MASK_CS ) {  // If a CTRL+SHIFT is being held
     if (clockwise) {
-        tap_code(RGB_SPI);         // Increase effect speed on clockwise turn
+        rgb_matrix_increase_sat();         // Increase saturation on clockwise turn
     } else {
-        tap_code(RGB_SPD);         // Decrease effect speed on counter-clockwise
+        rgb_matrix_decrease_sat();         // Decrease saturation on counter-clockwise
     }
-    set_mods(mod_state);           // Add back CTRL key(s)
-  } else if (get_mods() & MOD_MASK_SHIFT) {  // If a SHIFT is being held
-    uint8_t mod_state = get_mods();// Store which mods are held
-    del_mods(MOD_MASK_SHIFT);       // Ignore all SHIFT keys
-    if (clockwise) {
-        tap_code(RGB_VAI);         // Increase value (brightness) on clockwise turn
-    } else {
-        tap_code(RGB_VAD);         // Decrease value (brightness) on counter-clockwise
-    }
-    set_mods(mod_state);           // Add back SHIFT key(s)
-  } else if (get_mods() & MOD_MASK_ALT) {  // If a ALT is being held
-    uint8_t mod_state = get_mods();// Store which mods are held
-    del_mods(MOD_MASK_ALT);       // Ignore all ALT keys
-    if (clockwise) {
-        tap_code(RGB_HUI);         // Increase hue on clockwise turn
-    } else {
-        tap_code(RGB_HUD);         // Decrease hue on counter-clockwise
-    }
-    set_mods(mod_state);           // Add back ALT key(s)
-  } else if (get_mods() & MOD_MASK_CS) {  // If a CTRL+SHIFT is being held
-    uint8_t mod_state = get_mods();// Store which mods are held
-    del_mods(MOD_MASK_CS);       // Ignore all CTRL+SHIFT keys
-    if (clockwise) {
-        tap_code(RGB_SAI);         // Increase saturation on clockwise turn
-    } else {
-        tap_code(RGB_SAD);         // Decrease saturation on counter-clockwise
-    }
-    set_mods(mod_state);           // Add back CTRL+SHIFT key(s)
   } else if (get_mods() & MOD_MASK_SA) {  // If a SHIFT+ALT is being held
-    uint8_t mod_state = get_mods();// Store which mods are held
-    del_mods(MOD_MASK_SA);       // Ignore all SHIFT+ALT keys
     if (clockwise) {
-        tap_code(RGB_MOD);       // RGB MODE Forward on clockwise turn
+        rgb_matrix_increase_speed();         // Increase effect speed on clockwise turn
     } else {
-        tap_code(RGB_RMOD);   // RGB MODE Reverse on counter-clockwise
+        rgb_matrix_decrease_speed();         // Decrease effect speed on counter-clockwise
     }
-    set_mods(mod_state);           // Add back SHIFT+ALT key(s)
+  } else if (get_mods() & MOD_MASK_CTRL) {  // If a CTRL is being held
+    if (clockwise) {
+        rgb_matrix_step();         // Increase effect speed on clockwise turn
+    } else {
+        rgb_matrix_step_reverse();         // Decrease effect speed on counter-clockwise
+    }
+  } else if (get_mods() & MOD_MASK_SHIFT) {  // If a SHIFT is being held
+    if (clockwise) {
+        rgb_matrix_increase_val();         // Increase value (brightness) on clockwise turn
+    } else {
+        rgb_matrix_decrease_val();         // Decrease value (brightness) on counter-clockwise
+    }
+  } else if (get_mods() & MOD_MASK_ALT) {  // If a ALT is being held
+    if (clockwise) {
+        rgb_matrix_increase_hue();         // Increase hue on clockwise turn
+    } else {
+        rgb_matrix_decrease_hue();         // Decrease hue on counter-clockwise
+    }
   } else {                     // If no MODS is held
     if (clockwise) {
         tap_code(KC_VOLU);   // Volume up on clockwise turn
