@@ -145,13 +145,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 }
 
 bool encoder_update_user(uint8_t index, bool clockwise) {
-  if (get_mods() & MOD_MASK_CS ) {  // If a CTRL+SHIFT is being held
+  if ((get_mods() & MOD_MASK_CTRL) && (get_mods() & MOD_MASK_SHIFT)) {  // If a CTRL+SHIFT is being held
     if (clockwise) {
         rgb_matrix_increase_sat();         // Increase saturation on clockwise turn
     } else {
         rgb_matrix_decrease_sat();         // Decrease saturation on counter-clockwise
     }
-  } else if (get_mods() & MOD_MASK_SA) {  // If a SHIFT+ALT is being held
+  } else if ((get_mods() & MOD_MASK_ALT) && (get_mods() & MOD_MASK_SHIFT)) {  // If a SHIFT+ALT is being held
     if (clockwise) {
         rgb_matrix_increase_speed();         // Increase effect speed on clockwise turn
     } else {
