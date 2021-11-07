@@ -21,8 +21,10 @@ RGBLIGHT_ENABLE = yes       # Enable keyboard RGB underglow
 BLUETOOTH_ENABLE = no       # Enable Bluetooth
 AUDIO_ENABLE = no           # Audio output
 
-KEY_LOCK_ENABLE = yes     # Enable KC_LOCK support
+# KEY_LOCK_ENABLE = yes     # Enable KC_LOCK support
 DYNAMIC_MACRO_ENABLE = yes
+
+TAP_DANCE_ENABLE = yes
 
 DEFAULT_FOLDER = melody96hotiso
 
