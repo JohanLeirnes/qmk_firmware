@@ -20,8 +20,10 @@
 
 enum layers {
     MAC_BASE,
-    MAC_FN,
+    MAC_QWERTY,
     WIN_BASE,
+    WIN_QWERTY,
+    MAC_FN,
     WIN_FN,
     WIN_FN2,
     MAC_FN2

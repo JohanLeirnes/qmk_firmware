@@ -24,7 +24,9 @@ enum layers {
     WIN_BASE,
     WIN_FN,
     WIN_FN2,
-    MAC_FN2
+    MAC_FN2,
+    WIN_QWERTY,
+    MAC_QWERTY
 };
 
 // clang-format on
