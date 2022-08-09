@@ -28,7 +28,7 @@ enum custom_keycodes {
     KC_LAUNCHPAD,
     TWCH,
     GGEZ,
-    COLEMAK = SAFE_RANGE,
+    COLEMAK,
     QWERTY,
     GAME
 };
@@ -44,6 +44,11 @@ enum tapdance_keycodes {
 #define KC_FLXP LGUI(KC_E)
 #define KC_CAPP LGUI(LSFT(KC_4))
 #define MACLOCK LGUI(LCTL(KC_Q))
+#define MACLBRC LALT(LSFT(KC_8))
+#define MACRBRC LALT(LSFT(KC_9))
+#define MACCLBRC LALT(KC_8)
+#define MACCRBRC LALT(KC_9)
+#define MACBSLS LALT(LSFT(KC_7))
 
 qk_tap_dance_action_t tap_dance_actions[] = {
     [TD_LSFT_CAPS] = ACTION_TAP_DANCE_DOUBLE(KC_LSFT, KC_CAPS),
@@ -58,10 +63,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //-------------------------------------------------//-----------------------------------------------------------//
     KC_BSPC, KC_A, KC_R, KC_S, KC_T, KC_B,	                KC_M, KC_N, KC_E,    KC_I,   KC_O,     KC_QUOT,
 //-------------------------------------------------//-----------------------------------------------------------//
-    KC_LCTL, KC_Z, KC_X, KC_C, KC_D, KC_V,                  KC_K, KC_H, KC_COMM, KC_DOT, KC_SLSH,  KC_CAPP,
+    TD(TD_LSFT_CAPS), KC_Z, KC_X, KC_C, KC_D, KC_V,                  KC_K, KC_H, KC_COMM, KC_DOT, KC_SLSH,  KC_CAPP,
 //-------------------------------------------------//-----------------------------------------------------------//
-                        KC_LGUI, KC_SPC, MO(3),		     MO(4),  TD(TD_LSFT_CAPS), KC_ENT,
-                                 KC_BSLS,  KC_PSLS,      KC_HOME, KC_END
+                        KC_LGUI, KC_SPC, MO(3),		     MO(4),  KC_ENT, KC_LALT,
+                                 MACBSLS,  KC_PSLS,      KC_HOME, KC_END
   ),
 
   [1] = LAYOUT_split_4x6_5(
@@ -71,10 +76,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //-------------------------------------------------//-----------------------------------------------------------//
     KC_BSPC, KC_A, KC_S, KC_D, KC_F, KC_G,	                KC_H, KC_J, KC_K,    KC_L,   KC_QUOT, KC_SCLN,
 //-------------------------------------------------//-----------------------------------------------------------//
-    KC_LCTL, KC_Z, KC_X, KC_C, KC_V, KC_B,                  KC_N, KC_M, KC_COMM, KC_DOT, KC_SLSH,  KC_CAPP,
+    TD(TD_LSFT_CAPS), KC_Z, KC_X, KC_C, KC_V, KC_B,                  KC_N, KC_M, KC_COMM, KC_DOT, KC_SLSH,  KC_CAPP,
 //-------------------------------------------------//-----------------------------------------------------------//
-                        KC_LGUI, KC_SPC, MO(3),		     MO(4),  TD(TD_LSFT_CAPS), KC_ENT,
-                                 KC_BSLS,  KC_PSLS,      KC_HOME, KC_END
+                        KC_LGUI, KC_SPC, MO(3),		     MO(4),  KC_ENT, KC_LALT,
+                                 MACBSLS,  KC_PSLS,      KC_HOME, KC_END
   ),
 
   [2] = LAYOUT_split_4x6_5(
@@ -86,8 +91,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //-------------------------------------------------//-----------------------------------------------------------//
     KC_F6, KC_LCTL, KC_Z, KC_X, KC_C, KC_B,               KC_N, KC_M, KC_COMM, KC_DOT, KC_SLSH,  KC_CAPP,
 //-------------------------------------------------//-----------------------------------------------------------//
-                        KC_LGUI, KC_SPC, MO(3),		     MO(4),  TD(TD_LSFT_CAPS), KC_ENT,
-                                 KC_BSLS,  KC_PSLS,      KC_HOME, KC_END
+                        KC_LGUI, KC_SPC, MO(3),		     MO(4),  KC_ENT, KC_LALT,
+                                 MACBSLS,  KC_PSLS,      KC_HOME, KC_END
   ),
 
   [3] = LAYOUT_split_4x6_5(
@@ -106,11 +111,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [4] = LAYOUT_split_4x6_5(
     KC_F12,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,			      KC_F11,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,
 //---------------------------------------------------------//--------------------------------------------------------------//
-    _______, _______, _______, KC_UP,    _______, KC_LBRC,			  KC_RBRC, _______, KC_NLCK, KC_INS,  KC_SLCK,  KC_MUTE,
+    _______, _______, _______, KC_UP,  MACCLBRC, MACLBRC,			  MACRBRC, MACCRBRC, KC_NLCK, KC_INS,  KC_SLCK,  KC_MUTE,
 //---------------------------------------------------------//--------------------------------------------------------------//
     _______, _______,KC_LEFT, KC_DOWN, KC_RGHT, KC_LPRN,	      KC_RPRN, KC_MPRV, KC_MPLY, KC_MNXT, _______,  KC_VOLU,
 //---------------------------------------------------------//--------------------------------------------------------------//
-    _______, _______, _______,  _______, _______, _______,        _______, _______, _______, _______, _______,  KC_VOLD,
+    _______, _______, _______,  _______, _______, KC_BSLS,        _______, _______, _______, _______, _______,  KC_VOLD,
 //---------------------------------------------------------//--------------------------------------------------------------//
                                KC_LCTL, KC_HOME, KC_TRNS,		    KC_TRNS, KC_RALT, RESET,
                                         KC_SPC,  KC_BSPC,       KC_RCTL, KC_ENT
