@@ -24,6 +24,15 @@ enum crkbd_layers {
     _RAISE,
     _ADJUST,
 };
+
+// clang-format off
+enum custom_keycodes {
+    KC_LOWER = SAFE_RANGE,
+    KC_RAISE,
+    KC_ADJUST,
+    KC_LAYER
+};
+
 enum tapdance_keycodes {
     TD_LSFT_CAPS,
 };
@@ -39,7 +48,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       TD(TD_LSFT_CAPS),    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH,  KC_RSFT,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          KC_LGUI, MO(_LOWER),  KC_SPC,     KC_ENT, MO(_RAISE), KC_RALT
+                                          KC_LGUI, KC_LOWER,  KC_SPC,     KC_ENT, KC_RAISE, KC_RALT
                                       //`--------------------------'  `--------------------------'
 
   ),
@@ -309,7 +318,31 @@ bool oled_task_user(void) {
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-
+      case KC_LOWER:
+          if (record->event.pressed) {
+              layer_on(_LOWER);
+              update_tri_layer(_LOWER, _RAISE, _ADJUST);
+          } else {
+              layer_off(_LOWER);
+              update_tri_layer(_LOWER, _RAISE, _ADJUST);
+          }
+          return false;
+      case KC_RAISE:
+          if (record->event.pressed) {
+              layer_on(_RAISE);
+              update_tri_layer(_LOWER, _RAISE, _ADJUST);
+          } else {
+              layer_off(_RAISE);
+              update_tri_layer(_LOWER, _RAISE, _ADJUST);
+          }
+          return false;
+      case KC_ADJUST:
+          if (record->event.pressed) {
+              layer_on(_ADJUST);
+          } else {
+              layer_off(_ADJUST);
+          }
+          return false;
 
             /* KEYBOARD PET STATUS START */
 
