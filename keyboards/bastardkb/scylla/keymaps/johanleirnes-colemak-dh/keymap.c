@@ -65,8 +65,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //-------------------------------------------------//-----------------------------------------------------------//
     TD(TD_LSFT_CAPS), KC_Z, KC_X, KC_C, KC_D, KC_V,                  KC_K, KC_H, KC_COMM, KC_DOT, KC_SLSH,  KC_CAPP,
 //-------------------------------------------------//-----------------------------------------------------------//
-                        KC_LGUI, KC_SPC, MO(3),		     MO(4),  KC_ENT, KC_LALT,
-                                 MACBSLS,  KC_PSLS,      KC_HOME, KC_END
+                        KC_LGUI, KC_SPC, MO(4),		     MO(3),  KC_ENT, KC_LCTL,
+                                 KC_PSLS, KC_LALT,       KC_HOME, KC_END
   ),
 
   [1] = LAYOUT_split_4x6_5(
@@ -78,8 +78,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //-------------------------------------------------//-----------------------------------------------------------//
     TD(TD_LSFT_CAPS), KC_Z, KC_X, KC_C, KC_V, KC_B,                  KC_N, KC_M, KC_COMM, KC_DOT, KC_SLSH,  KC_CAPP,
 //-------------------------------------------------//-----------------------------------------------------------//
-                        KC_LGUI, KC_SPC, MO(3),		     MO(4),  KC_ENT, KC_LALT,
-                                 MACBSLS,  KC_PSLS,      KC_HOME, KC_END
+                        KC_LGUI, KC_SPC, MO(4),		     MO(3),  KC_ENT, KC_LCTL,
+                                 KC_PSLS, KC_LALT,      KC_HOME, KC_END
   ),
 
   [2] = LAYOUT_split_4x6_5(
@@ -91,8 +91,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //-------------------------------------------------//-----------------------------------------------------------//
     KC_F6, KC_LCTL, KC_Z, KC_X, KC_C, KC_B,               KC_N, KC_M, KC_COMM, KC_DOT, KC_SLSH,  KC_CAPP,
 //-------------------------------------------------//-----------------------------------------------------------//
-                        KC_LGUI, KC_SPC, MO(3),		     MO(4),  KC_ENT, KC_LALT,
-                                 MACBSLS,  KC_PSLS,      KC_HOME, KC_END
+                        KC_LGUI, KC_SPC, MO(4),		     MO(3),  KC_ENT, KC_LCTL,
+                                 KC_PSLS,  KC_LALT,      KC_HOME, KC_END
   ),
 
   [3] = LAYOUT_split_4x6_5(
@@ -104,21 +104,21 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //---------------------------------------------------------//-----------------------------------------------------------//
     _______, _______, _______, COLEMAK, QWERTY, GAME,           _______, KC_P1,   KC_P2,   KC_P3,   KC_EQL,   KC_UNDS,
 //---------------------------------------------------------//-----------------------------------------------------------//
-                               KC_LCTL, KC_HOME, KC_TRNS,		    KC_TRNS, KC_RALT, KC_RGUI,
-                                        KC_SPC,  KC_BSPC,       KC_RCTL, KC_ENT
+                            _______, _______, KC_TRNS,		    KC_TRNS, _______, _______,
+                                        _______,  _______,       _______, _______
   ),
 
   [4] = LAYOUT_split_4x6_5(
     KC_F12,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,			      KC_F11,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,
 //---------------------------------------------------------//--------------------------------------------------------------//
-    _______, _______, _______, KC_UP,  MACCLBRC, MACLBRC,			  MACRBRC, MACCRBRC, KC_NLCK, KC_INS,  KC_SLCK,  KC_MUTE,
+    _______, _______, _______, _______,  MACCLBRC, MACLBRC,			  MACRBRC, MACCRBRC, KC_UP, KC_INS,  KC_SLCK,  KC_MUTE,
 //---------------------------------------------------------//--------------------------------------------------------------//
-    _______, _______,KC_LEFT, KC_DOWN, KC_RGHT, KC_LPRN,	      KC_RPRN, KC_MPRV, KC_MPLY, KC_MNXT, _______,  KC_VOLU,
+    _______, _______, _______, _______, _______, KC_LPRN,	      KC_RPRN, KC_LEFT, KC_DOWN, KC_RGHT, _______,  KC_VOLU,
 //---------------------------------------------------------//--------------------------------------------------------------//
     _______, _______, _______,  _______, _______, KC_BSLS,        _______, _______, _______, _______, _______,  KC_VOLD,
 //---------------------------------------------------------//--------------------------------------------------------------//
-                               KC_LCTL, KC_HOME, KC_TRNS,		    KC_TRNS, KC_RALT, RESET,
-                                        KC_SPC,  KC_BSPC,       KC_RCTL, KC_ENT
+                               _______, _______, KC_TRNS,		    KC_TRNS, _______, _______,
+                                        _______,  _______,       _______, _______
   ),
 };
 
